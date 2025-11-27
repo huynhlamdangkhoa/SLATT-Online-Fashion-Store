@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "../css/pages/PasswordForgot.css";
-import sweetyLogo from "../assets/sweety-logo.svg";
+import sweetyLogo from "../assets/logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faSpinner } from "@fortawesome/free-solid-svg-icons";
 

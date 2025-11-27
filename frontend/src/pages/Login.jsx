@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "../css/pages/Login.css";
-import sweetyLogo from "../assets/sweety-logo.svg";
+import sweetyLogo from "../assets/logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faKey, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
@@ -25,12 +25,12 @@ function Login() {
 
             <div className="page-container login-container">
                 <a href="/home">
-                    <img className="logo" src={sweetyLogo} alt="Sweety Logo" />
+                    <img className="logo" src={sweetyLogo} alt="Logo" />
                 </a>
 
                 <div className="login-modal">
                     <div className="login-title">
-                        <h2>Login</h2>
+                        <h1>Login</h1>
                     </div>
 
                     <form

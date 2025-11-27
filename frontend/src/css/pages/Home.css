@@ -7,16 +7,18 @@
 
 .hero-title {
     font-size: 3.75rem;
-    background-image: linear-gradient(to right, #ebc6a8, #90584b);
+    background-image: linear-gradient(to right, #000000, #ffffff);
     background-clip: text;
     color: transparent;
     font-weight: 500;
+    padding-left: 32px;
 }
 
 .hero-subtitle {
-    color: #ebc6a8;
+    color: #000000;
     font-size: 1.875rem;
     font-weight: 400;
+    padding-left: 25px;
 }
 
 .hero-btn {
@@ -27,15 +29,15 @@
     margin-top: 2rem;
     padding: 2rem 4rem;
     background-color: transparent;
-    border: 1px solid #ebc6a8;
+    border: 1px solid #000000;
     border-radius: 999999px;
-    color: #ebc6a8;
+    color: #000000;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
 }
 
 .hero-btn:hover {
     background-color: transparent;
-    color: #f0f0f0;
-    border: 1px solid #f0f0f0;
+    color: #303030;
+    border: 1px solid #303030;
 }

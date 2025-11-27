@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
 import "../css/pages/Signup.css";
-import sweetyLogo from "../assets/sweety-logo.svg";
+import sweetyLogo from "../assets/logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faKey, faPhone, faUser, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
@@ -114,7 +114,7 @@ function Signup() {
                     </form>
 
                     <p className="signup-account">
-                        Already have an account? <a href="/login">Sign In</a>
+                        Already have an account? <a href="/login">Login</a>
                     </p>
                 </div>
             </div>

@@ -4,7 +4,7 @@ function Links() {
     return (
         <ul className="navbar-links">
             <li>
-                <a
+                <a 
                     href="/home"
                     title="Home"
                     style={

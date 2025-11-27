@@ -9,15 +9,15 @@
     display: inline-block;
     min-width: 6.25rem;
     padding: 0.6rem 1.4rem;
-    color: #ebc6a8;
-    border: 1px solid #ebc6a8;
+    color: #000000;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 10px;
     transition: border-color 0.2s, color 0.2s;
 }
 
 .navbar-actions .login-action:hover {
-    border-color: #f0f0f0;
-    color: #f0f0f0;
+    border-color: #383838;
+    color: #383838;
     cursor: pointer;
 }
 
@@ -26,14 +26,13 @@
     min-width: 6.25rem;
     padding: 0.6rem 1.4rem;
     color: #f0f0f0;
-    background-color: #ebc6a8;
-    border: 1px solid #ebc6a8;
+    background-color: #000000;
     border-radius: 10px;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .navbar-actions .signup-action:hover {
     background-color: transparent;
-    color: #f0f0f0;
-    border-color: #f0f0f0   ;
+    color: #383838;
+    border-color: #383838;
 }

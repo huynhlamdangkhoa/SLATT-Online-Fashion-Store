@@ -1,6 +1,6 @@
 import "../css/components/NavBar.css";
 
-import sweetyLogo from "../assets/sweety-logo.svg";
+import sweetyLogo from "../assets/logo.svg";
 
 import Links from "./Links.jsx";
 import LoginActions from "./LoginActions.jsx";
@@ -14,7 +14,7 @@ function NavBar() {
         <nav className="navbar">
             <div className="navbar-brand">
                 <a href="/home">
-                    <img src={sweetyLogo} alt="Sweety Logo" />
+                    <img src={sweetyLogo} alt="Logo" />
                 </a>
             </div>
 
