@@ -1,0 +1,282 @@
+.orderTrackContainer {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    z-index: 10;
+    padding: 3rem 1rem 3rem 1rem;
+    color: #f0f0f0;
+    font-family: "Poppins", sans-serif;
+}
+
+.orderTrackHeader {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.orderTrackHeader h1 {
+    margin-bottom: 1rem;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 300;
+}
+
+.orderTrackHeader p {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: #d1d5db;
+}
+
+.orderTrackList {
+    margin-top: 1.5rem;
+    min-width: 600px;
+    max-width: 72rem;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.orderTrackNotFoundContainer {
+    padding: 3rem;
+    border-radius: 1rem;
+    border-width: 1px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    color: #f0f0f0;
+}
+
+.boxIcon {
+    margin-bottom: 1rem;
+    color: #f0f0f0;
+}
+
+.orderTrackNotFoundContainer h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    color: #f0f0f0;
+}
+
+.orderTrackNotFoundContainer p {
+    color: #f0f0f0;
+}
+
+.orderTrackCard {
+    overflow: hidden;
+    border-radius: 1rem;
+    border-width: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    margin-bottom: 20px;
+}
+
+.orderTrackSummary {
+    padding: 1.5rem;
+}
+
+.orderTrackSummaryWrapper {
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.orderTrackStatusContainer {
+    min-width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.orderTrackStatus {
+    display: flex;
+    margin-left: 0.5rem;
+    align-items: center;
+}
+
+.orderTrackStatus span {
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-left: 8px;
+}
+
+.orderTrackLine {
+    width: 1px;
+    height: 1rem;
+    background-color: #f0f0f0;
+}
+
+.orderTrackId {
+    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #d1d5db;
+}
+
+.orderTrackDetailsButton {
+    display: flex;
+    margin-left: 0.5rem;
+    align-items: center;
+    background: transparent;
+    color: #f0f0f0;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    transition-duration: 200ms;
+    cursor: pointer;
+}
+
+.orderTrackDetailsButton:hover {
+    color: black;
+}
+
+.eyeIcon {
+    font-size: 16px;
+    margin-right: 4px;
+}
+
+.orderTrackDetailsButton span {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    margin-left: 4px;
+}
+
+.orderTrackInfo {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.orderTrackInfoLabel {
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #9ca3af;
+}
+
+.orderTrackInfoValue {
+    color: #e5e7eb;
+}
+
+.orderTrackOrderDetailsContainer {
+    border-top: 1px solid #acacac;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease;
+    opacity: 0;
+}
+
+.orderTrackOrderDetailsContainer.expanded {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+.orderTrackOrderDetailsWrapper {
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.orderTrackOrderDetailsContainer.expanded .orderTrackOrderDetailsWrapper {
+    padding: 1.5rem;
+}
+
+.orderItemsTitle {
+    color: #f0f0f0;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    transform: translateY(-10px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.orderTrackOrderDetailsContainer.expanded .orderItemsTitle {
+    transform: translateY(0);
+}
+
+.orderItemsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.orderItemCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    transition-delay: 0.1s;
+}
+
+.orderTrackOrderDetailsContainer.expanded .orderItemCard {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Stagger animation for multiple items */
+.orderTrackOrderDetailsContainer.expanded .orderItemCard:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.orderTrackOrderDetailsContainer.expanded .orderItemCard:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.orderTrackOrderDetailsContainer.expanded .orderItemCard:nth-child(4) {
+    transition-delay: 0.25s;
+}
+
+.orderItemLeft {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.orderItemImageContainer {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orderItemImageContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.orderItemIcon {
+    color: #9ca3af;
+}
+
+.orderItemName {
+    color: #e5e7eb;
+    font-weight: 500;
+}
+
+.orderItemQuantity {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+.orderItemPriceContainer {
+    text-align: right;
+}
+
+.orderItemTotalPrice {
+    color: #f0f0f0;
+    font-weight: 500;
+}
+
+.orderItemUnitPrice {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}

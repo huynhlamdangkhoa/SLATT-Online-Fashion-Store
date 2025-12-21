@@ -1,0 +1,130 @@
+.navbarActions {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+}
+
+.navbarActions li {
+    color: #f0f0f0;
+    cursor: pointer;
+    position: relative;
+}
+
+.userIcon,
+.cartIcon {
+    font-size: 1.2rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.userIcon:hover,
+.cartIcon:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.userDropdown {
+    position: relative;
+}
+
+.dropdownMenu {
+    position: absolute;
+    margin-top: 8px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    width: max-content;
+    z-index: 100;
+    overflow: hidden;
+    animation: dropdownFadeIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.dropdownItem {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background: transparent;
+    border: none;
+    color: #f0f0f0;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-family: inherit;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dropdownItem:last-child {
+    border-bottom: none;
+    color: #ff98a3;
+}
+
+.dropdownItem:hover {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.12));
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+.dropdownItem:last-child:hover {
+    background: linear-gradient(90deg, rgba(220, 53, 69, 0.08), rgba(220, 53, 69, 0.12));
+    color: #dc3545;
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-15px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+.cartContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.cartBadge {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: linear-gradient(135deg, #ff4444, #cc3333);
+    color: #ffffff;
+    border-radius: 999999px;
+    min-width: 16px;
+    height: 16px;
+    padding: 12px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    animation: badge-pulse 0.3s ease-in-out;
+    box-shadow: 0 2px 6px rgba(255, 68, 68, 0.4);
+}
+
+@keyframes badge-pulse {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cartContainer:hover .cartBadge {
+    background: linear-gradient(135deg, #ff6666, #ee4444);
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(255, 68, 68, 0.5);
+}

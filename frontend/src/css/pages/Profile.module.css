@@ -1,0 +1,82 @@
+.profileContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh
+}
+
+.profileModal {
+    font-family: "Poppins", sans-serif;
+    width: 45%;
+    padding: 4rem 5rem;
+    margin: 0 auto;
+    color: #f0f0f0;
+    border: 1px solid #f0f0f0;
+    border-radius: 20px;
+    background: rgba(8, 9, 11, 0.3);
+    backdrop-filter: blur(7.5px);
+}
+
+.profileTitle h2 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+    background-image: linear-gradient(to right, #ebc6a8 41.3%, #f0f0f0 56.57%);
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1.5rem;
+}
+
+.profileInputRow {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    margin-top: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.profileForm label {
+    font-family: "Poppins", sans-serif;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+    color: #f0f0f0;
+}
+
+.profileForm input {
+    font-family: "Poppins", sans-serif;
+    background: transparent;
+    color: #f0f0f0;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+.profileButton {
+    width: 100%;
+    margin-top: 5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: 1px solid #ebc6a8;
+    border-radius: 20px;
+    color: #f0f0f0;
+    background-color: #ebc6a8;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+.profileButton:disabled {
+    background-color: rgb(146, 146, 146);
+    border-color: rgb(146, 146, 146);
+    cursor: default;
+}
+
+.profileButton:hover:not(:disabled) {
+    background: transparent;
+    border: 1px solid #ebc6a8;
+    color: #ebc6a8;
+}

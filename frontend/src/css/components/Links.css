@@ -1,0 +1,30 @@
+.navbar-links {
+    padding-left: 0;     
+    margin-left: -21rem;     
+    list-style: none;  
+    display: flex;
+    justify-content: flex-start;  
+    gap: 2.875rem;       
+    align-items: center;
+    font-weight: 500;
+}
+
+
+
+.navbar-links a {
+    color: #ffffff;
+}
+
+.navbar-links a:hover {
+    font-weight: bold;
+    color: #acacac;
+}
+
+.navbar-links a::before {
+    display: block;
+    content: attr(title);
+    font-weight: bold;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}

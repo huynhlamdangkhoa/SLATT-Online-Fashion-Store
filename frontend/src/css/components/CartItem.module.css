@@ -1,0 +1,101 @@
+.cart_item_row {
+    display: grid;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f07d;
+    height: 120px;
+    font-family: "Poppins", sans-serif;
+}
+
+.product_container {
+    display: flex;
+    align-items: center;
+    gap: 4.5rem;
+}
+
+.product_image_container {
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    background: transparent;
+}
+
+.product_image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.product_name {
+    font-weight: 300;
+    color: #f0f0f0;
+}
+
+.product_price {
+    font-weight: 300;
+    text-align: center;
+    color: #f0f0f0;
+}
+
+.product_quantity_container {
+    display: flex;
+    margin-left: 0.75rem;
+    margin-left: 0.875rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.product_quantity_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
+    margin: 0 0.5rem;
+    background: transparent;
+    cursor: pointer;
+}
+
+.product_quantity_icon {
+    color: #f0f0f0;
+}
+
+.product_quantity {
+    font-weight: 300;
+    text-align: center;
+    color: #f0f0f0;
+}
+
+.product_subtotal {
+    font-weight: 300;
+    text-align: center;
+    color: #f0f0f0;
+    position: relative;
+}
+
+.product_delete {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    background: transparent;
+}
+
+.product_delete_button {
+    background: transparent;
+    cursor: pointer;
+}
+
+.delete_icon {
+    color: #f0f0f0;
+    width: 18px;
+    height: 18px;
+    transition: color 0.2s;
+}
+
+.delete_icon:hover {
+    color: #dc3545;
+}

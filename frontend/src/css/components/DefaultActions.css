@@ -1,0 +1,40 @@
+.navbar-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+}
+
+.navbar-actions .login-action {
+    display: inline-block;
+    min-width: 6.25rem;
+    padding: 0.6rem 1.4rem;
+    color: #ffffff;
+    border: 3px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.navbar-actions .login-action:hover {
+    border-color: #acacac;
+    color: #acacac;
+    cursor: pointer;
+}
+
+.navbar-actions .signup-action {
+    border: 3px solid rgb(255, 255, 255);
+    display: inline-block;
+    min-width: 6.25rem;
+    padding: 0.6rem 1.4rem;
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 10px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.navbar-actions .signup-action:hover {
+    border-color: #acacac;
+    background-color: transparent;
+    color: #acacac;
+    border-color: #acacac;
+}

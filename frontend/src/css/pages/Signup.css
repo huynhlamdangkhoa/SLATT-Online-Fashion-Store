@@ -1,0 +1,113 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    top: 2rem;
+    left: 5.25rem;
+    width: 124px;
+}
+
+.signup-modal {
+    font-family: "Poppins", sans-serif;
+    width: 30%;
+    padding: 4rem 5rem;
+    margin: 0 auto;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    background: rgba(8, 9, 11, 0.3);
+    backdrop-filter: blur(7.5px);
+}
+
+.signup-title h2 {
+    font-weight: 400;
+    font-size: 4rem;
+    text-align: center;
+    background-image: linear-gradient(to right, #ffffff 20%, #b6b6b6 30%, #ffffff 50%);
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1.5rem;
+}
+
+.signup-form label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+    background: linear-gradient(90deg, #fff 0%, #ffffff 100%);
+    background-clip: text;
+    color: transparent;
+}
+
+.error-message {
+    font-size: 0.75rem;
+    color: #fb2c36;
+    font-weight: 400;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+.signup-button {
+    width: 100%;
+    margin-top: 1.25rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: #000000;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    background-color: #c9c9c9;
+    border: 1px solid #c9c9c9;
+    color: #ffffff;
+}
+
+.loading {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.signup-account {
+    margin-top: 2rem;
+    font-weight: 200;
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+.signup-account p {
+    background: linear-gradient(90deg, #fff 0%, #c9c9c9 100%);
+    background-clip: text;
+    color: transparent;
+}
+
+.signup-account a {
+    color: #ffffff;
+    font-weight: 500;
+    font-weight: bold;
+}
+
+.signup-account a:hover {
+    color: #ffffff;
+    font-weight: 500;
+    font-weight: bold;
+}

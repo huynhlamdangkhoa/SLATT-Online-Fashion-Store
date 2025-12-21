@@ -1,0 +1,256 @@
+.productModal {
+    background: rgba(8, 9, 11, 0.3);
+    backdrop-filter: blur(7.5px);
+    border: 1px solid #f0f0f0;
+    border-radius: 20px;
+    padding: 4rem 5rem;
+    width: 35%;
+    margin: 0 auto;
+    margin-top: 84px;
+    margin-bottom: 84px;
+    font-family: "Poppins", sans-serif;
+}
+
+.productTitle {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.productTitle h2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    margin: 0;
+    background-image: linear-gradient(to right, #ebc6a8 41.3%, #f0f0f0 56.57%);
+    background-clip: text;
+    color: transparent;
+}
+
+.productForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.productForm label {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+    display: block;
+    background: linear-gradient(90deg, #fff 0%, #ebc6a8 100%);
+    background-clip: text;
+    color: transparent;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.inputIcon {
+    position: absolute;
+    left: 15px;
+    color: #ebc6a8;
+    z-index: 1;
+    pointer-events: none;
+    font-size: 16px;
+}
+
+.productInput {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    margin-bottom: 4px;
+    border: 1px solid #ebc6a8;
+    border-radius: 20px;
+    font-size: 16px;
+    background: rgba(8, 9, 11, 0.2);
+    color: #f0f0f0;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: "Poppins", sans-serif;
+}
+
+.productInput::placeholder {
+    color: #999;
+}
+
+.productInput:focus {
+    border-color: #ebc6a8;
+    box-shadow: 0 0 0 2px rgba(235, 198, 168, 0.2);
+}
+
+/* Select wrapper styling */
+.selectWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.selectIcon {
+    position: absolute;
+    left: 15px;
+    color: #ebc6a8;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.categorySelect {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 1px solid #ebc6a8;
+    border-radius: 20px;
+    font-size: 16px;
+    background: rgba(8, 9, 11, 0.2);
+    color: #f0f0f0;
+    outline: none;
+    transition: all 0.3s ease;
+    appearance: none;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+}
+
+.categorySelect:focus {
+    border-color: #ebc6a8;
+    box-shadow: 0 0 0 2px rgba(235, 198, 168, 0.2);
+}
+
+.categorySelect option {
+    padding: 10px;
+    background: rgba(8, 9, 11, 0.9);
+    color: #f0f0f0;
+}
+
+/* File input styling */
+.fileWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.fileInput {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 1px solid #ebc6a8;
+    border-radius: 20px;
+    font-size: 16px;
+    background: rgba(8, 9, 11, 0.2);
+    color: #f0f0f0;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+}
+
+.fileInput:focus {
+    border-color: #ebc6a8;
+    box-shadow: 0 0 0 2px rgba(235, 198, 168, 0.2);
+}
+
+.fileInput::file-selector-button {
+    background: #ebc6a8;
+    color: #f0f0f0;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Checkbox styling */
+.checkboxWrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: rgba(8, 9, 11, 0.2);
+    border-radius: 20px;
+    border: 1px solid #ebc6a8;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.checkboxWrapper:hover {
+    border-color: #ebc6a8;
+    background: rgba(235, 198, 168, 0.1);
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: #ebc6a8;
+    cursor: pointer;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 400;
+    color: #f0f0f0;
+    cursor: pointer;
+    margin: 0;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+}
+
+.checkboxLabel svg {
+    color: #ebc6a8;
+    font-size: 18px;
+}
+
+/* Submit button */
+.productButton {
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 0.75rem;
+    border: 1px solid #ebc6a8;
+    border-radius: 20px;
+    color: #f0f0f0;
+    background-color: #ebc6a8;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.productButton:hover:not(:disabled) {
+    background: transparent;
+    border: 1px solid #ebc6a8;
+    color: #ebc6a8;
+}
+
+.productButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .productModal {
+        padding: 2rem 1.5rem;
+        max-width: 100%;
+    }
+
+    .productTitle h2 {
+        font-size: 1.25rem;
+    }
+
+    .productInput,
+    .categorySelect,
+    .fileInput {
+        font-size: 14px;
+        padding: 12px 12px 12px 40px;
+    }
+
+    .productButton {
+        padding: 0.75rem;
+        font-size: 0.75rem;
+    }
+}
