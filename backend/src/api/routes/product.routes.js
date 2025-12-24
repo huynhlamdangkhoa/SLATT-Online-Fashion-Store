@@ -25,7 +25,7 @@ productRouter
     .post(
         verifyToken,
         checkAdmin,
-        upload.single("image"), // tên field: image
+        upload.single("image"), 
         productController.createNewProductFromForm
     );
 

@@ -310,3 +310,32 @@
     font-size: 0.75rem;
     color: #f0f0f0;
 }
+
+
+.delete-product-btn {
+  margin-top: 6px;
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-product-btn:hover {
+  background: #d9363e;
+}
+
+
+.product-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;    
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     
+}

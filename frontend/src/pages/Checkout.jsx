@@ -1,158 +1,153 @@
 import { useState, useEffect } from "react";
-import { useLocation, Navigate, useNavigate } from "react-router";
+import { Navigate, useLocation, useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
 
 import s from "../css/pages/Checkout.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-
 import NavBar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
+
 import { useProfileStore } from "../store/profileStore.js";
 import { useCartStore } from "../store/cartStore.js";
 import { useOrderStore } from "../store/orderStore.js";
 
 function Checkout() {
-    const location = useLocation();
-    const [formData, setFormData] = useState({
-        fullName: "",
-        email: "",
-        phoneNumber: "",
-        address: "",
-    });
-    const navigate = useNavigate();
-    const { getUserProfile, profile } = useProfileStore();
-    const { cartItems, getCartItems, clearCart } = useCartStore();
-    const { placeTheOrder } = useOrderStore();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    if (!location.state?.fromCart) {
-        return <Navigate to="/cart" replace />;
+  const { profile, getUserProfile } = useProfileStore();
+  const { cartItems, getCartItems, clearCart } = useCartStore();
+  const { placeTheOrder, isLoading } = useOrderStore();
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+  });
+
+  if (!location.state?.fromCart) {
+    return <Navigate to="/cart" replace />;
+  }
+
+  // Load profile & cart items khi component mount
+  useEffect(() => {
+    getUserProfile();
+    getCartItems();
+  }, []);
+
+
+  useEffect(() => {
+    if (profile) {
+      setFormData({
+        fullName: profile.fullName || "",
+        email: profile.email || "",
+        phoneNumber: profile.phoneNumber || "",
+        address: profile.address || "",
+      });
+    }
+  }, [profile]);
+
+  const subtotal = cartItems.reduce(
+    (sum, i) => sum + i.price * i.quantity,
+    0
+  );
+
+  const handlePlaceOrder = async () => {
+    if (cartItems.length === 0) {
+      toast.error("Cart is empty!");
+      return;
     }
 
-    useEffect(() => {
-        getUserProfile();
-    }, [getUserProfile]);
-
-    useEffect(() => {
-        getCartItems();
-    }, [getCartItems]);
-
-    useEffect(() => {
-        if (profile) {
-            const profileData = {
-                fullName: profile.fullName || "",
-                email: profile.email || "",
-                phoneNumber: profile.phoneNumber || "",
-                address: profile.address || "",
-            };
-            setFormData(profileData);
-        }
-    }, [profile]);
-
-    const subtotal = cartItems.reduce((total, cartItem) => total + cartItem.price * cartItem.quantity, 0);
-
-    const handlePlaceOrder = async () => {
-        await placeTheOrder();
-        toast.success("Placed order successfully", { style: { fontFamily: "Poppins" } });
-        navigate("/track-order", { replace: true });
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
+    const orderData = {
+      items: cartItems.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      customer: {
+        fullName: formData.fullName,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        address: formData.address,
+      },
+      subtotal,
     };
 
-    return (
-        <>
-            <title>Checkout | Sweety</title>
+    try {
+  await placeTheOrder(orderData);
 
-            <div className="page-container">
-                <NavBar />
+  toast.success("Placed order successfully!");
+  navigate("/track-order", { replace: true });
+  } catch (err) {
+    console.error("Place order error:", err);
+    toast.error("Failed to place order!");
+    return;
+  }
 
-                <div className={s.checkoutModal}>
-                    <div className={s.checkoutTitle}>
-                        <h2>DELIVERY INFORMATION</h2>
-                    </div>
+  try {
+    clearCart();
+  } catch (err) {
+    console.warn("Clear cart failed:", err);
+  }
 
-                    <div className={s.checkoutInfoContainer}>
-                        <div className={s.checkoutInfoRow}>
-                            <span className={s.checkoutInfoLabel}>Full Name</span>
-                            <span className={s.checkoutInfo}>{formData.fullName}</span>
-                        </div>
+    
+  };
 
-                        <div className={s.checkoutInfoRow}>
-                            <span className={s.checkoutInfoLabel}>Email</span>
-                            <span className={s.checkoutInfo}>{formData.email}</span>
-                        </div>
+  return (
+    <div className="page-container">
+      <NavBar />
 
-                        <div className={s.checkoutInfoRow}>
-                            <span className={s.checkoutInfoLabel}>Phone Number</span>
-                            <span className={s.checkoutInfo}>{formData.phoneNumber}</span>
-                        </div>
+      <div className={s.checkoutModal}>
+        <h2>DELIVERY INFORMATION</h2>
 
-                        <div className={s.checkoutInfoRow}>
-                            <span className={s.checkoutInfoLabel}>Address</span>
-                            <span className={s.checkoutInfo}>{formData.address}</span>
-                        </div>
-                    </div>
+        <div className={s.checkoutInfoContainer}>
+          <p><b>Full Name:</b> {formData.fullName}</p>
+          <p><b>Email:</b> {formData.email}</p>
+          <p><b>Phone:</b> {formData.phoneNumber}</p>
+          <p><b>Address:</b> {formData.address}</p>
+        </div>
 
-                    <div className={s.checkoutTitle}>
-                        <h2>ORDER DETAILS</h2>
-                    </div>
+        <h2>ORDER DETAILS</h2>
 
-                    <div className={s.checkoutOrderContainer}>
-                        {cartItems.map((cartItem) => (
-                            <div key={cartItem.id} className={s.checkoutOrderRow}>
-                                <span className={s.checkoutOrderAmount}>
-                                    {cartItem.quantity} x {cartItem.product.name}
-                                </span>
-                                <span className={s.checkoutOrderPrice}>
-                                    ${(cartItem.price * cartItem.quantity).toFixed(2)}
-                                </span>
-                            </div>
-                        ))}
+        <div className={s.checkoutOrderContainer}>
+          {cartItems.length === 0 ? (
+            <p>Your cart is empty.</p>
+          ) : (
+            cartItems.map((item) => (
+              <div key={item.id} className={s.checkoutOrderRow}>
+                <span>
+                  {item.quantity} x {item.Product?.name || "Không có tên"}
+                </span>
+                <span>
+                  ${(item.price * item.quantity).toFixed(2)}
+                </span>
+              </div>
+            ))
+          )}
 
-                        <div className={s.checkoutSubtotalRow}>
-                            <span className={s.checkoutSubtotalLabel}>Subtotal</span>
-                            <span className={s.checkoutSubtotal}>${subtotal.toFixed(2)}</span>
-                        </div>
-                    </div>
+          <div className={s.checkoutSubtotalRow}>
+            <b>Subtotal</b>
+            <b>${subtotal.toFixed(2)}</b>
+          </div>
+        </div>
 
-                    <div className={s.checkoutTitle}>
-                        <h2>PAYMENT METHOD</h2>
-                    </div>
+        <button
+          disabled={
+            !formData.address ||
+            !formData.phoneNumber ||
+            isLoading ||
+            cartItems.length === 0
+          }
+          className={s.checkoutButton}
+          onClick={handlePlaceOrder}
+        >
+          PLACE ORDER
+        </button>
+      </div>
 
-                    <div className={s.checkoutPaymentContainer}>
-                        <div className={s.checkoutPaymentRow}>
-                            <span className={s.checkoutPaymentLabel}>Cash on Delivery</span>
-                            <span className={s.checkoutPayment}>
-                                <FontAwesomeIcon icon={faCircleCheck} />
-                            </span>
-                        </div>
-                    </div>
-
-                    {formData.address === "" && (
-                        <p className="error-message">Address cannot be empty! Please go to your profile and fill it.</p>
-                    )}
-                    {formData.phoneNumber === "" && (
-                        <p className="error-message">
-                            Phone number cannot be empty! Please go to your profile and fill it.
-                        </p>
-                    )}
-
-                    <button
-                        disabled={formData.address === "" || formData.phoneNumber === ""}
-                        type="submit"
-                        className={s.checkoutButton}
-                        onClick={handlePlaceOrder}
-                    >
-                        PLACE ORDER
-                    </button>
-                </div>
-
-                <Footer />
-            </div>
-        </>
-    );
+      <Footer />
+    </div>
+  );
 }
 
 export default Checkout;

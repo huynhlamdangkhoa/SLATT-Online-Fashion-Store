@@ -20,6 +20,7 @@ import TrackOrder from "./pages/TrackOrder.jsx";
 import { useAuthStore } from "./store/authStore.js";
 import ShowOrder from "./pages/ShowOrder.jsx";
 import NewProduct from "./pages/NewProduct.jsx";
+import EditProductPage from "./pages/EditProductPage";
 
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated, user, isCheckingAuth } = useAuthStore();
@@ -169,6 +170,12 @@ function App() {
                     }
                 />
                 <Route path="/password-forgot" element={<PasswordForgot />} />
+
+
+                <Route
+                    path="/products/:id/edit"
+                    element={<EditProductPage />}
+                />
             </Routes>
             <Toaster
                 toastOptions={{

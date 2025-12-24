@@ -66,3 +66,50 @@
     font-size: 1.1rem;
     color: #ebc6a8;
 }
+
+
+.product-image-container {
+  position: relative;
+}
+
+/* ADMIN ACTIONS */
+.admin-actions {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+/* EDIT */
+.edit-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  background: #4caf50;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn:hover {
+  background: #43a047;
+}
+
+/* DELETE */
+.delete-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  background: #f44336;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #d32f2f;
+}

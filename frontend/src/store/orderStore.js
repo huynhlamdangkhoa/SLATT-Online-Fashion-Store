@@ -1,65 +1,54 @@
 import { create } from "zustand";
 import axios from "axios";
 
-import { useCartStore } from "./cartStore.js";
-
 const API_URL = "http://localhost:5000/api/v1/order";
-
 axios.defaults.withCredentials = true;
 
-export const useOrderStore = create((set, get) => ({
-    orders: [],
-    isLoading: false,
-    error: null,
-    message: null,
+export const useOrderStore = create((set) => ({
+  orders: [],
+  isLoading: false,
+  error: null,
 
-    placeTheOrder: async () => {
-        set({ isLoading: true, error: null });
-        try {
-            const response = await axios.post(`${API_URL}/`);
+  placeTheOrder: async (orderData) => {
+  set({ isLoading: true, error: null });
+  try {
+    console.log("📤 Sending order to backend:", orderData);
 
-            // const activeOrder = response.data.data.activeOrder;
-            const newOrder = response.data.data.newOrder;
+    const res = await axios.post(API_URL, orderData);
 
-            set({
-                isLoading: false,
-            });
+    console.log("✅ Order response:", res.data);
 
-            const { handleOrderPlaced } = useCartStore.getState();
-            handleOrderPlaced(newOrder);
+    set({ isLoading: false });
+    return res.data;
+  } catch (err) {
+    console.error("❌ Order API error:", err.response || err);
 
-            return response.data;
-        } catch (err) {
-            set({ error: err.response?.data?.message || "Error placing order", isLoading: false });
-            throw err;
-        }
-    },
+    set({
+      error: err.response?.data?.message || "Error placing order",
+      isLoading: false,
+    });
+    throw err;
+  }
+},
 
-    getOrders: async () => {
-        set({ isLoading: true, error: null });
-        try {
-            const response = await axios.get(`${API_URL}/`);
 
-            set({ orders: response.data.data.orders, isLoading: false });
+  getOrders: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const res = await axios.get(`${API_URL}/`);
+      set({ orders: res.data.data.orders, isLoading: false });
+    } catch (err) {
+      set({ error: err.response?.data?.message || "Error fetching orders", isLoading: false });
+    }
+  },
 
-            return response.data;
-        } catch (err) {
-            set({ error: err.response?.data?.message || "Error get orders", isLoading: false });
-            throw err;
-        }
-    },
-
-    getOrdersAdmin: async () => {
-        set({ isLoading: true, error: null });
-        try {
-            const response = await axios.get(`${API_URL}/admin`);
-
-            set({ orders: response.data.data.orders, isLoading: false });
-
-            return response.data;
-        } catch (err) {
-            set({ error: err.response?.data?.message || "Error get orders", isLoading: false });
-            throw err;
-        }
-    },
+  getOrdersAdmin: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const res = await axios.get(`${API_URL}/admin`);
+      set({ orders: res.data.data.orders, isLoading: false });
+    } catch (err) {
+      set({ error: err.response?.data?.message || "Error fetching admin orders", isLoading: false });
+    }
+  },
 }));

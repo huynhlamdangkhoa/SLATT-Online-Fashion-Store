@@ -16,7 +16,8 @@ import { useAuthStore } from "../store/authStore.js";
 
 function Products() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
+  const isAdmin = user?.role === "admin" || user?.isAdmin === true;
 
   const { addProductToCart } = useCartStore();
   const {
@@ -39,6 +40,7 @@ function Products() {
     setCurrentPage,
     getProducts,
     clearError,
+    deleteProduct,
   } = useProductsStore();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -55,10 +57,10 @@ function Products() {
 
   const filters = [
     { id: "All", label: "All" },
-    { id: "Breads", label: "Breads" },
-    { id: "Cakes", label: "Cakes" },
-    { id: "Candies", label: "Candies" },
-    { id: "Pastries", label: "Pastries" },
+    { id: "Shirt", label: "Shirt" },
+    { id: "Pants", label: "Pants" },
+    { id: "Dress", label: "Dress" },
+    { id: "Shoes", label: "Shoes" },
   ];
 
   const getCurrentSortOption = () => {
@@ -115,19 +117,35 @@ const handleAddToCart = async (product) => {
     navigate("/login");
     return;
   }
-  try {
-    const result = await addProductToCart(product._id || product.id);
+
+  const result = await addProductToCart(product._id || product.id);
+
     if (result.status === "success") {
       toast.success(result.message);
     } else {
       toast.error(result.message);
     }
-  } catch (err) {
-    toast.error("Failed to add product to cart!");
-    console.error(err);
-  }
-};
+  };
 
+  const handleEditProduct = (id) => {
+    navigate(`/products/${id}/edit`);
+  };
+
+
+
+  const handleDeleteProduct = async (productId) => {
+      const ok = window.confirm("Are you sure you want to delete this product?");
+      if (!ok) return;
+
+      const result = await deleteProduct(productId);
+
+      if (result.status === "success") {
+        toast.success("Product deleted");
+        getProducts();
+      } else {
+        toast.error(result.message || "Delete failed");
+      }
+    };
 
   const itemsPerPage = 12;
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -215,7 +233,14 @@ const handleAddToCart = async (product) => {
               <div className="loading-spinner">Loading products...</div>
             ) : products && products.length > 0 ? (
               products.map((product) => (
-                <ProductCard key={product._id || product.id} product={product} onAddToCart={handleAddToCart} />
+                <ProductCard 
+                key={product._id || product.id} 
+                product={product} 
+                onAddToCart={handleAddToCart} 
+                isAdmin={isAdmin}
+                onEdit={handleEditProduct}
+                onDelete={handleDeleteProduct}
+                />
               ))
             ) : (
               <div className="no-products">

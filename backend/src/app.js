@@ -3,14 +3,17 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
-
+import path from "path";
 import { appConfig, connectDB } from "./config/index.js";
 import { authRouter, productRouter, cartRouter, profileRouter, orderRouter } from "./api/routes/index.js";
 
 const app = express();
 
 // up ảnh
-app.use("/uploads", express.static("uploads"));
+app.use(
+  "/uploads",
+  express.static(path.resolve("uploads"))
+);
 
 // Middlewares
 app.use(cors({ origin: appConfig.clientURL, credentials: true }));

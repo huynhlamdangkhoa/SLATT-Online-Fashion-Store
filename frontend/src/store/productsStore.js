@@ -123,4 +123,26 @@ export const useProductsStore = create((set, get) => ({
     set({ currentPage: page });
     await get().getProducts();
   },
+
+
+  deleteProduct: async (id) => {
+  set({ isLoading: true, error: null });
+
+  try {
+    const res = await axios.delete(`${API_URL}/${id}`);
+
+    // reload list
+    await get().getProducts();
+
+    set({ isLoading: false });
+    return { status: "success" };
+  } catch (err) {
+    set({
+      error: err.response?.data?.message || "Delete failed",
+      isLoading: false,
+    });
+    return { status: "error", message: err.response?.data?.message };
+  }
+},
+
 }));

@@ -11,8 +11,8 @@ cartRouter.get("/", verifyToken, cartController.getCartItems);
 cartRouter.post("/:productId", verifyToken, cartController.addProductToCart);
 
 // Tăng / giảm số lượng sản phẩm trong cart
-cartRouter.post("/increase/:productId", verifyToken, cartController.increaseProductQuantity);
-cartRouter.post("/decrease/:productId", verifyToken, cartController.decreaseProductQuantity);
+cartRouter.post("/increase/item/:cartItemId", verifyToken, cartController.increaseProductQuantity);
+cartRouter.post("/decrease/item/:cartItemId", verifyToken, cartController.decreaseProductQuantity);
 
 // Xóa cart item
 cartRouter.delete("/item/:cartItemId", verifyToken, cartController.deleteProductFromCart);

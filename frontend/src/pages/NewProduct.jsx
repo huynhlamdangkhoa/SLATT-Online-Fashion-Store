@@ -84,7 +84,7 @@ function NewProduct() {
       formData.append("category", category);
       formData.append("stock", parseInt(stock) || 0);
       formData.append("available", available ? "true" : "false");
-      formData.append("image", imageFile); // backend nhận key "image"
+      formData.append("image", imageFile); 
       formData.append("description", description);
 
       await createNewProduct(formData);
@@ -141,10 +141,10 @@ function NewProduct() {
               className={styles.categorySelect}
             >
               <option value="">Select a category</option>
-              <option value="Breads">Breads</option>
-              <option value="Cakes">Cakes</option>
-              <option value="Candies">Candies</option>
-              <option value="Pastries">Pastries</option>
+              <option value="Shirt">Shirt</option>
+              <option value="Pants">Pants</option>
+              <option value="Dress">Dress</option>
+              <option value="Shoes">Shoes</option>
             </select>
 
             <label>Stock Quantity</label>

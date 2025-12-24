@@ -81,41 +81,38 @@ export const addProductToCart = async (req, res) => {
 // Tăng số lượng sản phẩm
 export const increaseProductQuantity = async (req, res) => {
   try {
-    const userId = req.userId;
-    const productId = parseInt(req.params.productId, 10);
+    const cartItemId = parseInt(req.params.cartItemId, 10);
 
-    const activeOrder = await getOrCreateActiveOrder(userId);
-    const item = await CartItem.findOne({ where: { orderId: activeOrder.id, productId } });
-
+    const item = await CartItem.findByPk(cartItemId);
     if (!item)
-      return res.status(404).json({ code: 404, status: "fail", message: "Cart item not found" });
+      return res.status(404).json({ message: "Cart item not found" });
 
     item.quantity += 1;
     await item.save();
 
-    const items = await CartItem.findAll({ where: { orderId: activeOrder.id } });
+    const items = await CartItem.findAll({ where: { orderId: item.orderId } });
     const totalAmount = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    await activeOrder.update({ amount: totalAmount, totalAmount });
 
-    await item.reload({ include: [Product] });
+    await Order.update(
+      { amount: totalAmount, totalAmount },
+      { where: { id: item.orderId } }
+    );
 
-    res.status(200).json({ code: 200, status: "success", data: { item, activeOrder } });
+    res.status(200).json({ item });
   } catch (err) {
-    res.status(500).json({ code: 500, status: "error", message: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
+
 
 // Giảm số lượng sản phẩm
 export const decreaseProductQuantity = async (req, res) => {
   try {
-    const userId = req.userId;
-    const productId = parseInt(req.params.productId, 10);
+    const cartItemId = parseInt(req.params.cartItemId, 10);
 
-    const activeOrder = await getOrCreateActiveOrder(userId);
-    const item = await CartItem.findOne({ where: { orderId: activeOrder.id, productId } });
-
+    const item = await CartItem.findByPk(cartItemId);
     if (!item)
-      return res.status(404).json({ code: 404, status: "fail", message: "Cart item not found" });
+      return res.status(404).json({ message: "Cart item not found" });
 
     if (item.quantity <= 1) {
       await item.destroy();
@@ -124,17 +121,20 @@ export const decreaseProductQuantity = async (req, res) => {
       await item.save();
     }
 
-    const items = await CartItem.findAll({ where: { orderId: activeOrder.id } });
+    const items = await CartItem.findAll({ where: { orderId: item.orderId } });
     const totalAmount = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    await activeOrder.update({ amount: totalAmount, totalAmount });
 
-    if (item.quantity > 0) await item.reload({ include: [Product] });
+    await Order.update(
+      { amount: totalAmount, totalAmount },
+      { where: { id: item.orderId } }
+    );
 
-    res.status(200).json({ code: 200, status: "success", data: { item, activeOrder } });
+    res.status(200).json({ item });
   } catch (err) {
-    res.status(500).json({ code: 500, status: "error", message: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
+
 
 // Xóa sản phẩm khỏi cart
 export const deleteProductFromCart = async (req, res) => {

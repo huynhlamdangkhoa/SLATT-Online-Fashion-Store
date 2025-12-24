@@ -1,67 +1,71 @@
-import { useCallback } from "react";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
-
 import s from "../css/components/CartItem.module.css";
-
 import { useCartStore } from "../store/cartStore.js";
 
 function CartItem({ cartItem }) {
-    const increaseProductQuantity = useCartStore((state) => state.increaseProductQuantity);
-    const decreaseProductQuantity = useCartStore((state) => state.decreaseProductQuantity);
-    const deleteProductFromCart = useCartStore((state) => state.deleteProductFromCart);
+  if (!cartItem) return null;
 
-    const increaseQuantity = useCallback(() => {
-        increaseProductQuantity(cartItem.product._id);
-    }, [increaseProductQuantity, cartItem.product._id]);
+  const { id, quantity, price, Product } = cartItem;
+  const subtotal = (price * quantity).toFixed(2);
 
-    const decreaseQuantity = useCallback(() => {
-        decreaseProductQuantity(cartItem.product._id);
-    }, [decreaseProductQuantity, cartItem.product._id]);
+  const increaseProductQuantity = useCartStore(
+    (state) => state.increaseProductQuantity
+  );
+  const decreaseProductQuantity = useCartStore(
+    (state) => state.decreaseProductQuantity
+  );
+  const deleteProductFromCart = useCartStore(
+    (state) => state.deleteProductFromCart
+  );
 
-    const handleDeleteProductFromCart = useCallback(async () => {
-        console.log(cartItem);
-        await deleteProductFromCart(cartItem.id);
-    }, [deleteProductFromCart, cartItem.id, cartItem]);
+  return (
+    <div className={s.cart_item}>
+      {/* PRODUCT */}
+      <div className={s.product_info}>
+        <img
+          src={
+            Product.imageURL
+              ? `http://localhost:5000${Product.imageURL}`
+              : "/placeholder.png"
+          }
+          alt={Product.name}
+          className={s.product_image}
+        />
 
-    return (
-        <div className={s.cart_item_row}>
-            {/* Product */}
-            <div className={s.product_container}>
-                <div className={s.product_image_container}>
-                    <img src={cartItem.product.imageURL} alt={cartItem.product.name} className={s.product_image} />
-                </div>
-                <span className={s.product_name}>{cartItem.product.name}</span>
-            </div>
+        <span className={s.product_name}>
+          {Product.name ?? `Product #${id}`}
+        </span>
 
-            {/* Price */}
-            <div className={s.product_price}>${cartItem.price.toFixed(2)}</div>
+      </div>
 
-            {/* Quantity Controls */}
-            <div className={s.product_quantity_container}>
-                <button onClick={decreaseQuantity} className={s.product_quantity_button}>
-                    <FontAwesomeIcon size={16} icon={faMinus} className={s.product_quantity_icon} />
-                </button>
+      {/* PRICE */}
+      <div className={s.product_price}>
+        ${price.toFixed(2)}
+      </div>
 
-                <span className={s.product_quantity}>{cartItem.quantity}</span>
+      {/* QUANTITY */}
+      <div className={s.product_quantity}>
+        <button
+          onClick={() => decreaseProductQuantity(id)}
+          disabled={quantity <= 1}
+        >
+          −
+        </button>
+        <span>{quantity}</span>
+        <button onClick={() => increaseProductQuantity(id)}>+</button>
+      </div>
 
-                <button onClick={increaseQuantity} className={s.product_quantity_button}>
-                    <FontAwesomeIcon size={16} icon={faPlus} className={s.product_quantity_icon} />
-                </button>
-            </div>
-
-            {/* Subtotal */}
-            <div className={s.product_subtotal}>
-                ${(cartItem.price * cartItem.quantity).toFixed(2)}
-                <div className={s.product_delete}>
-                    <button className={s.product_delete_button} onClick={handleDeleteProductFromCart}>
-                        <FontAwesomeIcon className={s.delete_icon} icon={faX} />
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
+      {/* SUBTOTAL + DELETE */}
+      <div className={s.product_subtotal}>
+        ${subtotal}
+        <button
+          className={s.delete_btn}
+          onClick={() => deleteProductFromCart(id)}
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default CartItem;

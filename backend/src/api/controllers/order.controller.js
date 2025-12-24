@@ -1,15 +1,13 @@
 import { Order, CartItem, Product, User } from "../models/index.js";
 import { Op } from "sequelize";
 
-// Lấy đơn hàng của user
+// Get orders for logged-in user
 export const getOrdersByUser = async (req, res) => {
   const userId = req.userId;
   try {
     const orders = await Order.findAll({
       where: { userId, orderStatus: { [Op.in]: ["placed", "shipped", "delivered"] } },
-      include: [
-        { model: CartItem, include: [Product] }
-      ],
+      include: [{ model: CartItem, include: [Product] }],
       order: [["placedTime", "DESC"]],
     });
 
@@ -19,28 +17,31 @@ export const getOrdersByUser = async (req, res) => {
   }
 };
 
-// Place order từ cart pending
+// Place order from pending cart
 export const placeTheOrder = async (req, res) => {
   try {
     const userId = req.userId;
 
+    // Find the pending order
     const order = await Order.findOne({
       where: { userId, orderStatus: "pending" },
-      include: [{ model: CartItem, include: [Product] }]
+      include: [{ model: CartItem, include: [Product] }],
     });
-    if (!order) return res.status(404).json({ code: 404, status: "fail", message: "Active order not found" });
+
+    if (!order)
+      return res.status(404).json({ code: 404, status: "fail", message: "Active order not found" });
 
     const items = order.CartItems;
+    const totalQuantity = items.reduce((sum, i) => sum + i.quantity, 0);
+    const totalAmount = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
-    const totalQuantity = items.reduce((s, it) => s + it.quantity, 0);
-    const totalAmount = items.reduce((s, it) => s + it.price * it.quantity, 0);
-
+    // Update order
     await order.update({
       orderStatus: "placed",
       placedTime: new Date(),
       totalQuantity,
       totalAmount,
-      amount: totalAmount
+      amount: totalAmount,
     });
 
     res.status(200).json({ code: 200, status: "success", data: { order } });
@@ -49,7 +50,7 @@ export const placeTheOrder = async (req, res) => {
   }
 };
 
-// Admin: xem tất cả đơn hàng
+// Admin: get all orders
 export const getAllOrdersFromUsers = async (req, res) => {
   try {
     const orders = await Order.findAll({
